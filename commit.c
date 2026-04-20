@@ -198,6 +198,9 @@ int commit_create(const char *message, ObjectID *commit_id_out) {
     // (See Lab Appendix for logical steps)
     tree_from_index(index, tree_hash);
     head_read(parent_hash);
+    commit.author = pes_author();
+    commit.timestamp = time(NULL);
+    commit.message = message;
     (void)message; (void)commit_id_out;
     return -1;
 }
