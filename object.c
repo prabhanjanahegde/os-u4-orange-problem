@@ -111,6 +111,10 @@ int object_write(ObjectType type, const void *data, size_t len, ObjectID *id_out
     snprintf(dir, sizeof(dir), ".pes/objects/%.2s", hash_hex);
     mkdir(dir, 0755);
     snprintf(path, sizeof(path),".pes/objects/%.2s/%s",hash_hex,hash_hex + 2);
+    FILE *fp = fopen(tmp_path, "wb");
+    fwrite(buffer, 1, total, fp);
+    fclose(fp);
+    rename(tmp_path, path);
     (void)type; (void)data; (void)len; (void)id_out;
     return -1;
 }
