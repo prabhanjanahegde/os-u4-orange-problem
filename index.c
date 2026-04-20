@@ -139,6 +139,7 @@ int index_load(Index *index) {
     // (See Lab Appendix for logical steps)
     FILE *fp = fopen(".pes/index", "r");
     if (!fp) return 0;
+    sscanf(line, "%o %64s %ld %ld %s",&mode, hash, &mtime, &size, path);
     (void)index;
     return -1;
 }
