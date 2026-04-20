@@ -134,6 +134,9 @@ int tree_from_index(ObjectID *id_out) {
     // (See Lab Appendix for logical steps)
     Tree *root = tree_create();
     char *slash = strchr(entry->path, '/');
+    if (slash) {
+        tree_insert_subtree(root, ...);
+    }
     (void)id_out;
     return -1;
 }
