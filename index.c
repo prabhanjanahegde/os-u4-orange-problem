@@ -183,6 +183,8 @@ int index_save(const Index *index) {
 int index_add(Index *index, const char *path) {
     // TODO: Implement file staging
     // (See Lab Appendix for logical steps)
+    entry->mtime = st.st_mtime;
+    entry->size = st.st_size;
     (void)index; (void)path;
     return -1;
 }
