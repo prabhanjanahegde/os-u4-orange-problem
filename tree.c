@@ -137,6 +137,7 @@ int tree_from_index(ObjectID *id_out) {
     if (slash) {
         tree_insert_subtree(root, ...);
     }
+    tree_add_entry(root,entry->mode,entry->path,entry->hash);
     (void)id_out;
     return -1;
 }
