@@ -146,6 +146,10 @@ int object_read(const ObjectID *id, ObjectType *type_out, void **data_out, size_
     FILE *fp = fopen(path, "rb");
     fread(raw, 1, size, fp);
     fclose(fp);
+    SHA256(raw, size, verify_digest);
+
+    if (memcmp(verify_digest, expected_digest, SHA256_DIGEST_LENGTH) != 0)
+        return -1;
     (void)id; (void)type_out; (void)data_out; (void)len_out;
     return -1;
 }
