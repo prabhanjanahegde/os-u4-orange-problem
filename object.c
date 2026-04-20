@@ -103,7 +103,12 @@ int object_write(ObjectType type, const void *data, size_t len, ObjectID *id_out
     memcpy(buffer, header, header_len);
     buffer[header_len] = '\0';
     memcpy(buffer + header_len + 1, data, len);
-    (void)type; (void)data; (void)len; (void)id_out;
+    unsigned char digest[SHA256_DIGEST_LENGTH];
+    SHA256(buffer, total, digest);
+
+    for (int i = 0; i < SHA256_DIGEST_LENGTH; i++)
+        sprintf(hash_hex + i * 2, "%02x", digest[i]);
+        (void)type; (void)data; (void)len; (void)id_out;
     return -1;
 }
 
