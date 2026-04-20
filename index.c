@@ -166,7 +166,7 @@ int index_save(const Index *index) {
     fflush(fp);
     fsync(fileno(fp));
     fclose(fp);
-
+    object_write(OBJ_BLOB, data, size, hash);
     (void)index;
     return -1;
 }
