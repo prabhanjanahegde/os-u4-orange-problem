@@ -133,6 +133,7 @@ int tree_from_index(ObjectID *id_out) {
     // TODO: Implement recursive tree building
     // (See Lab Appendix for logical steps)
     Tree *root = tree_create();
+    char *slash = strchr(entry->path, '/');
     (void)id_out;
     return -1;
 }
