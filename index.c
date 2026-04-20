@@ -140,6 +140,7 @@ int index_load(Index *index) {
     FILE *fp = fopen(".pes/index", "r");
     if (!fp) return 0;
     sscanf(line, "%o %64s %ld %ld %s",&mode, hash, &mtime, &size, path);
+    qsort(index->entries,index->count,sizeof(IndexEntry),compare_index_entries);
     (void)index;
     return -1;
 }
