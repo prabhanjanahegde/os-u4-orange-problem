@@ -143,6 +143,9 @@ int object_write(ObjectType type, const void *data, size_t len, ObjectID *id_out
 // Returns 0 on success, -1 on error (file not found, corrupt, etc.).
 int object_read(const ObjectID *id, ObjectType *type_out, void **data_out, size_t *len_out) {
     // TODO: Implement
+    FILE *fp = fopen(path, "rb");
+    fread(raw, 1, size, fp);
+    fclose(fp);
     (void)id; (void)type_out; (void)data_out; (void)len_out;
     return -1;
 }
