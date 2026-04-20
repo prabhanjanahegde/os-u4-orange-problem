@@ -201,6 +201,9 @@ int commit_create(const char *message, ObjectID *commit_id_out) {
     commit.author = pes_author();
     commit.timestamp = time(NULL);
     commit.message = message;
+    commit_serialize(&commit, &buf, &len);
+    object_write(OBJ_COMMIT, buf, len, commit_hash);
+    head_update(commit_hash);
     (void)message; (void)commit_id_out;
     return -1;
 }
