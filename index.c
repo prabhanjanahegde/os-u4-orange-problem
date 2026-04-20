@@ -141,14 +141,6 @@ int index_load(Index *index) {
     if (!fp) return 0;
     sscanf(line, "%o %64s %ld %ld %s",&mode, hash, &mtime, &size, path);
     qsort(index->entries,index->count,sizeof(IndexEntry),compare_index_entries);
-    FILE *fp = fopen(".pes/index.lock", "w");
-    if (!fp)
-        return -1;
-
-    fflush(fp);
-    fsync(fileno(fp));
-    fclose(fp);
-
     rename(".pes/index.lock", ".pes/index");
     (void)index;
     return -1;
@@ -167,6 +159,14 @@ int index_load(Index *index) {
 int index_save(const Index *index) {
     // TODO: Implement atomic index saving
     // (See Lab Appendix for logical steps)
+    FILE *fp = fopen(".pes/index.lock", "w");
+    if (!fp)
+        return -1;
+
+    fflush(fp);
+    fsync(fileno(fp));
+    fclose(fp);
+
     (void)index;
     return -1;
 }
