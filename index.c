@@ -137,6 +137,8 @@ int index_status(const Index *index) {
 int index_load(Index *index) {
     // TODO: Implement index loading
     // (See Lab Appendix for logical steps)
+    FILE *fp = fopen(".pes/index", "r");
+    if (!fp) return 0;
     (void)index;
     return -1;
 }
